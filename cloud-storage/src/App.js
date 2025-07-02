@@ -5,21 +5,16 @@ import Uploaded from "./Uploaded";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [texts, setTexts] = useState([]);
-  const [message, setMessage] = useState("");
   const [images, setImages] = useState([]);
   const [selectedFile, setSelectedFile] = useState(null);
   const [viewIndex, setViewIndex] = useState(null);
 
   useEffect(() => {
     if (!user) return;
-    fetch(`http://localhost:3000/api/images?user=${user}`)
+    fetch(`http://192.168.1.11:3000/api/images?user=${user}`)
       .then((res) => res.json())
       .then(setImages);
-    fetch(`http://localhost:3000/api/texts?user=${user}`)
-      .then((res) => res.json())
-      .then(setTexts);
-  }, [user]);
+  }, [user, images]);
 
   const handleImageUpload = async (e) => {
     e.preventDefault();
@@ -27,7 +22,7 @@ function App() {
     formData.append("user", user);
     formData.append("image", selectedFile);
 
-    fetch("http://localhost:3000/api/upload-image", {
+    fetch("http://192.168.1.11:3000/api/upload-image", {
       method: "POST",
       body: formData,
     })

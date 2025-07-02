@@ -22,12 +22,12 @@ export default function Uploaded({viewIndex,setViewIndex,images,user,setImages})
             >
               <a
                 key={i}
-                href={`http://localhost:3000${img.url}`}
+                href={`http://192.168.1.11:3000${img.url}`}
                 target="_blank"
                 rel="noopener noreferrer"
               >
                 <img
-                  src={`http://localhost:3000${img.url}`}
+                  src={`http://192.168.1.11:3000${img.url}`}
                   alt={img.name}
                   style={{
                     maxWidth: "200px",
@@ -38,7 +38,7 @@ export default function Uploaded({viewIndex,setViewIndex,images,user,setImages})
                 />
               </a>
               <a
-                href={`http://localhost:3000/download/${user}/${img.name}`}
+                href={`http://192.168.1.11:3000/download/${user}/${img.name}`}
                 style={{
                   display: "block",
                   marginTop: "10px",
@@ -71,7 +71,7 @@ export default function Uploaded({viewIndex,setViewIndex,images,user,setImages})
                   );
                   if (!confirmDelete) return;
                   await fetch(
-                    `http://localhost:3000/api/images/${user}/${img.name}`,
+                    `http://192.168.1.11:3000/api/images/${user}/${img.name}`,
                     { method: "DELETE" }
                   );
                   setImages(images.filter((_, idx) => idx !== i));
