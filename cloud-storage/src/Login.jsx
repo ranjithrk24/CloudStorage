@@ -5,10 +5,19 @@ function Login({ onLogin }) {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
 
+  function getApiUrl(path) {
+    // If running on localhost:3001, replace with 3000 for API calls
+    if (window.location.port === "3001") {
+      return `http://localhost:3000${path}`;
+    }
+    // In production, use relative path
+    return path;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
-    const res = await fetch('http://192.168.1.11:3000/api/login', {
+    const res = await fetch(getApiUrl('/api/login'), {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ username, password }),

@@ -1,0 +1,9 @@
+create server folder
+npm init -y
+
+install required libraries
+npm install express multer
+
+how to run(cmd)
+cloudflared.exe tunnel --url http://localhost:3000
+run server using node

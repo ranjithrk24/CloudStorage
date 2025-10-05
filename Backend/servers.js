@@ -26,6 +26,7 @@ const texts = [];  // { message, user }
 
 // Login endpoint
 app.post('/api/login', (req, res) => {
+  console.log('requested',req.body);
   const { username, password } = req.body;
   const user = users.find(u => u.username === username && u.password === password);
   if (!user) return res.status(401).json({ error: 'Invalid credentials' });
@@ -135,4 +136,10 @@ app.delete('/api/images/:user/:filename', (req, res) => {
   });
 });
 
-app.listen(3000, () => console.log('Server running on port 3000'));
+app.use(express.static(path.join(__dirname, 'build')));
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../cloud-storage/build', 'index.html'));
+});
+
+
+app.listen(3000,'0.0.0.0', () => console.log('Server running on port 3000'));
